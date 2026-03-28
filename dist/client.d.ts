@@ -1,4 +1,4 @@
-import type { AlertResult, BatchResponse, Event, EventPayload, EventResponse, ExportFilters, ExportResponse, ExportStatus, ImmutableConfig, QueryFilters, QueryResult, VerifyResult } from './types.js';
+import type { AlertResult, AnchorDetailResult, AnchorListResult, AnchorVerifyResult, BatchResponse, Event, EventPayload, EventResponse, ExportFilters, ExportResponse, ExportStatus, ImmutableConfig, QueryFilters, QueryResult, VerifyResult } from './types.js';
 export declare class ImmutableClient {
     private readonly apiKey;
     private readonly baseUrl;
@@ -27,6 +27,9 @@ export declare class ImmutableClient {
     }): Promise<AlertResult>;
     createExport(filters?: ExportFilters): Promise<ExportResponse>;
     getExport(id: string): Promise<ExportStatus>;
+    getAnchors(limit?: number): Promise<AnchorListResult>;
+    getAnchor(id: string): Promise<AnchorDetailResult>;
+    verifyAnchor(id: string): Promise<AnchorVerifyResult>;
     private request;
     private toSearchParams;
 }

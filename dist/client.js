@@ -49,6 +49,17 @@ export class ImmutableClient {
     async getExport(id) {
         return this.request('GET', `/v1/exports/${id}`);
     }
+    // ── Anchors ──────────────────────────────────────────────────────
+    async getAnchors(limit) {
+        const params = limit ? `?limit=${limit}` : '';
+        return this.request('GET', `/v1/anchors${params}`);
+    }
+    async getAnchor(id) {
+        return this.request('GET', `/v1/anchors/${id}`);
+    }
+    async verifyAnchor(id) {
+        return this.request('GET', `/v1/anchors/${id}/verify`);
+    }
     async request(method, path, body) {
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), this.timeout);

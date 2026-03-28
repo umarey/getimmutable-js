@@ -36,5 +36,19 @@ export class Immutable {
             },
         };
     }
+    get anchors() {
+        const client = this.client;
+        return {
+            list(limit) {
+                return client.getAnchors(limit);
+            },
+            get(id) {
+                return client.getAnchor(id);
+            },
+            verify(id) {
+                return client.verifyAnchor(id);
+            },
+        };
+    }
 }
 //# sourceMappingURL=immutable.js.map

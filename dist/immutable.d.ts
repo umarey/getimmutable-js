@@ -1,6 +1,6 @@
 import { ImmutableClient } from './client.js';
 import { PendingEvent } from './pending-event.js';
-import type { Actor, AlertResult, Event, ExportFilters, ExportResponse, ExportStatus, ImmutableConfig, QueryFilters, QueryResult, VerifyResult } from './types.js';
+import type { Actor, AlertResult, AnchorDetailResult, AnchorListResult, AnchorVerifyResult, Event, ExportFilters, ExportResponse, ExportStatus, ImmutableConfig, QueryFilters, QueryResult, VerifyResult } from './types.js';
 export declare class Immutable {
     readonly client: ImmutableClient;
     constructor(config: ImmutableConfig);
@@ -21,6 +21,11 @@ export declare class Immutable {
             to?: string;
             limit?: number;
         }): Promise<AlertResult>;
+    };
+    get anchors(): {
+        list(limit?: number): Promise<AnchorListResult>;
+        get(id: string): Promise<AnchorDetailResult>;
+        verify(id: string): Promise<AnchorVerifyResult>;
     };
 }
 //# sourceMappingURL=immutable.d.ts.map
