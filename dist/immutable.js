@@ -17,8 +17,8 @@ export class Immutable {
             get(id) {
                 return client.getEvent(id);
             },
-            verify(from, to) {
-                return client.verify(from, to);
+            verify(from, to, limit) {
+                return client.verify(from, to, limit);
             },
             createExport(filters) {
                 return client.createExport(filters);

@@ -3,6 +3,9 @@ import { PendingEvent } from './pending-event.js';
 import type {
   Actor,
   AlertResult,
+  AnchorDetailResult,
+  AnchorListResult,
+  AnchorVerifyResult,
   Event,
   ExportFilters,
   ExportResponse,
@@ -50,6 +53,21 @@ export class Immutable {
     return {
       list(filters?: { rule_type?: string; from?: string; to?: string; limit?: number }): Promise<AlertResult> {
         return client.getAlerts(filters);
+      },
+    };
+  }
+
+  get anchors() {
+    const client = this.client;
+    return {
+      list(limit?: number): Promise<AnchorListResult> {
+        return client.getAnchors(limit);
+      },
+      get(id: string): Promise<AnchorDetailResult> {
+        return client.getAnchor(id);
+      },
+      verify(id: string): Promise<AnchorVerifyResult> {
+        return client.verifyAnchor(id);
       },
     };
   }

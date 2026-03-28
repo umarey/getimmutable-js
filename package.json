@@ -1,5 +1,5 @@
 {
-  "name": "@getimmutable/sdk",
+  "name": "getimmutable",
   "version": "0.1.0",
   "description": "JavaScript/TypeScript SDK for the Immutable Audit Log API",
   "type": "module",

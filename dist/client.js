@@ -21,12 +21,14 @@ export class ImmutableClient {
     async getEvent(id) {
         return this.request('GET', `/v1/events/${id}`);
     }
-    async verify(from, to) {
+    async verify(from, to, limit) {
         const params = new URLSearchParams();
         if (from)
             params.set('from', from);
         if (to)
             params.set('to', to);
+        if (limit !== undefined)
+            params.set('limit', String(limit));
         const qs = params.toString();
         return this.request('GET', `/v1/verify${qs ? `?${qs}` : ''}`);
     }

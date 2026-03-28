@@ -93,14 +93,16 @@ export interface QueryFilters {
     limit?: number;
 }
 export interface VerifyResult {
-    valid: boolean;
-    events_checked: number;
-    breaks: Array<{
-        event_id: string;
-        type: string;
-        expected_hash?: string;
-        actual_hash?: string;
-    }>;
+    data: {
+        valid: boolean;
+        events_checked: number;
+        breaks: Array<{
+            event_id: string;
+            type: string;
+            expected_hash?: string;
+            actual_hash?: string;
+        }>;
+    };
 }
 export interface AlertItem {
     id: string;
@@ -117,20 +119,28 @@ export interface AlertItem {
 }
 export interface AlertResult {
     data: AlertItem[];
-    pagination: {
-        limit: number;
-        count: number;
-    };
+    pagination: Pagination;
+}
+export interface ExportFilters {
+    from?: string;
+    to?: string;
+    actor_id?: string;
+    action?: string;
+    resource?: string;
+    tenant_id?: string;
+    session_id?: string;
+    search?: string;
 }
 export interface ExportResponse {
-    id: string;
-    status: string;
-    expires_at?: string | null;
+    data: {
+        id: string;
+        status: 'pending' | 'processing' | 'completed' | 'failed';
+    };
 }
 export interface ExportStatus {
     data: {
         id: string;
-        status: string;
+        status: 'pending' | 'processing' | 'completed' | 'failed';
         filters: Record<string, string>;
         total_rows: number | null;
         file_size: number | null;

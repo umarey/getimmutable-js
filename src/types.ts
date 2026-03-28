@@ -150,3 +150,45 @@ export interface ExportStatus {
     expires_at: string | null;
   };
 }
+
+export interface AnchorItem {
+  id: string;
+  merkle_root: string;
+  previous_anchor_hash: string | null;
+  events_count: number;
+  period_start: string;
+  period_end: string;
+  chain: string;
+  status: 'pending' | 'submitted' | 'confirmed' | 'failed';
+  tx_hash: string | null;
+  block_number: number | null;
+  explorer_url: string | null;
+  created_at: string;
+}
+
+export interface AnchorDetail extends AnchorItem {
+  first_event_hash: string;
+  last_event_hash: string;
+}
+
+export interface AnchorListResult {
+  data: AnchorItem[];
+}
+
+export interface AnchorDetailResult {
+  data: AnchorDetail;
+}
+
+export interface AnchorVerifyResult {
+  data: {
+    anchor_id: string;
+    merkle_root: string;
+    valid: boolean;
+    chain_valid: boolean;
+    expected: string;
+    actual: string;
+    events_count: number;
+    tx_hash: string | null;
+    explorer_url: string | null;
+  };
+}

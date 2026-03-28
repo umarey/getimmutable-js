@@ -1,6 +1,9 @@
 import { ImmutableError } from './errors.js';
 import type {
   AlertResult,
+  AnchorDetailResult,
+  AnchorListResult,
+  AnchorVerifyResult,
   BatchResponse,
   Event,
   EventPayload,
@@ -70,6 +73,21 @@ export class ImmutableClient {
 
   async getExport(id: string): Promise<ExportStatus> {
     return this.request<ExportStatus>('GET', `/v1/exports/${id}`);
+  }
+
+  // ── Anchors ──────────────────────────────────────────────────────
+
+  async getAnchors(limit?: number): Promise<AnchorListResult> {
+    const params = limit ? `?limit=${limit}` : '';
+    return this.request<AnchorListResult>('GET', `/v1/anchors${params}`);
+  }
+
+  async getAnchor(id: string): Promise<AnchorDetailResult> {
+    return this.request<AnchorDetailResult>('GET', `/v1/anchors/${id}`);
+  }
+
+  async verifyAnchor(id: string): Promise<AnchorVerifyResult> {
+    return this.request<AnchorVerifyResult>('GET', `/v1/anchors/${id}/verify`);
   }
 
   private async request<T>(method: string, path: string, body?: unknown): Promise<T> {

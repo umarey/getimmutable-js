@@ -1,4 +1,4 @@
-import type { AlertResult, BatchResponse, Event, EventPayload, EventResponse, ExportResponse, ExportStatus, ImmutableConfig, QueryFilters, QueryResult, VerifyResult } from './types.js';
+import type { AlertResult, BatchResponse, Event, EventPayload, EventResponse, ExportFilters, ExportResponse, ExportStatus, ImmutableConfig, QueryFilters, QueryResult, VerifyResult } from './types.js';
 export declare class ImmutableClient {
     private readonly apiKey;
     private readonly baseUrl;
@@ -10,13 +10,14 @@ export declare class ImmutableClient {
     getEvent(id: string): Promise<{
         data: Event;
     }>;
-    verify(from?: string, to?: string): Promise<VerifyResult>;
+    verify(from?: string, to?: string, limit?: number): Promise<VerifyResult>;
     createViewerToken(options: {
         tenantId?: string;
         actorId?: string;
         ttl?: number;
     }): Promise<{
         token: string;
+        expires_at: number;
     }>;
     getAlerts(filters?: {
         rule_type?: string;
@@ -24,7 +25,7 @@ export declare class ImmutableClient {
         to?: string;
         limit?: number;
     }): Promise<AlertResult>;
-    createExport(filters?: Record<string, string>): Promise<ExportResponse>;
+    createExport(filters?: ExportFilters): Promise<ExportResponse>;
     getExport(id: string): Promise<ExportStatus>;
     private request;
     private toSearchParams;
